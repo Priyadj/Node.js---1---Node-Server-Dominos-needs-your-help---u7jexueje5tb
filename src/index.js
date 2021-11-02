@@ -9,7 +9,7 @@ const contact =express()
 welcome.get('/', function (req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/plain')
-  res.send('Welcome to Dominos!')
+    res.send('Welcome to Dominos!')
 
 })
 
@@ -30,7 +30,7 @@ app.use('/contact', contact);
 const httpServer = http.createServer(app);
 
 
-httpServer.listen(8081);
+httpServer.listen(3000);
 
 
 
