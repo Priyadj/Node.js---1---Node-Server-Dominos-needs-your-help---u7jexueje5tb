@@ -1,27 +1,34 @@
 var http = require("http");
 const fs = require("fs");
+const express = require("express");
 
-const httpServer = http.createServer(handleServer);
+var app = express() 
+var welcome = express() 
+var contact =express()
 
+welcome.get('/', function (req, res) {
+  res.send('Welcome to Dominos!')
+  res.status(200);
+  res.set('Content-Type', 'text/plain')
+})
 
-function handleServer(req, res) {
-    if(req.url == '/welcome'){
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.write('Welcome to Dominos!');
-        res.end();
-        return;
-    }
-    if(req.url == '/contact'){
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.write( JSON.stringify({
-            'phone': '18602100000',
-            'email': 'guestcaredominos@jublfood.com'
-        }));
-        res.end();
-        return;
-    }
+contact.get('/', function (req, res) {
+    res.status(200);
+    res.set('Content-Type', 'application/json')
+    res.send({
+        'phone': '18602100000',
+        'email': 'guestcaredominos@jublfood.com'
+      })
   
-}
+ 
+    })
+
+app.use('/welcome', welcome);
+app.use('/contact', contact);
+
+const httpServer = http.createServer(app);
+
+
 httpServer.listen(3000);
 
 
