@@ -1,5 +1,9 @@
 const http = require("http");
 const fs = require("fs");
+const express = require("express");
+const { nextTick } = require("process");
+
+const app = express();
 
 
 
@@ -13,6 +17,7 @@ function handleServer(req,res) {
         res.end();
         return;
     }
+   
     if(req.url === "/contact"){
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -23,8 +28,16 @@ function handleServer(req,res) {
         res.end();
         return;
     }
+    else{
+        res.statusCode = 400;
+        res.end();
+    }
 }
 
+
+
+  
+  
 
 httpServer.listen(8081);
 
